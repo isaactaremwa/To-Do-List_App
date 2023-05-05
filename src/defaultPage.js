@@ -15,7 +15,7 @@ export default function DefaultPage({navigation}){
 
   useEffect(() =>{
     const timeout = setTimeout(() => {
-      navigation.replace('My Tasks');
+      navigation.replace('My-Tasks');
     }, 2000);
     return () => clearTimeout(timeout)
   });

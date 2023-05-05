@@ -9,6 +9,8 @@ import ToDo from './src/ToDo';
 import Task from './src/Task';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { Provider } from 'react-redux';
+import { Store } from './src/logo/redux/store';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,8 +20,8 @@ function HomeTabs() {
       screenOptions={({route}) => ({
         // activeBackgroundColor: '#0080ff',
         // inactiveBackgroundColor: '#777777',
-        showLabel: true,
-        labelStyle: {fontSize: 14, fontWeight: 'bold'},
+        // showLabel: true,
+        // labelStyle: {fontSize: 14, fontWeight: 'bold'},
         tabBarIcon: ({focused, size, color}) => {
           let iconName;
           if (route.name === 'To-Do') {
@@ -35,14 +37,14 @@ function HomeTabs() {
         },
       })}
       tabBarOptions={{
-      //   activeBackgroundColor: '#0080ff',
-      //   inactiveBackgroundColor: '#777777',
+        // activeBackgroundColor: '#0080ff',
+        // inactiveBackgroundColor: '#777777',
         showLabel: true,
         labelStyle: {fontSize: 14, fontWeight: 'bold'},
       }}
       >
       <Tab.Screen
-        name="To-Do"
+        name="My Tasks"
         component={ToDo}
         options={{
           headerTitleAlign: 'center',
@@ -53,7 +55,7 @@ function HomeTabs() {
           headerTintColor: 'goldenrod',
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Completed"
         component={Done}
         options={{
@@ -64,7 +66,7 @@ function HomeTabs() {
           },
           headerTintColor: 'goldenrod',
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 }
@@ -73,6 +75,7 @@ const RootStack = createStackNavigator();
 
 function ToDOList() {
   return (
+    <Provider store={Store}>
     <NavigationContainer>
       <RootStack.Navigator
         initialRouteName="DefaultPage"
@@ -91,7 +94,7 @@ function ToDOList() {
         />
 
         <RootStack.Screen
-          name="My Tasks"
+          name="My-Tasks"
           component={HomeTabs}
           options={{headerShown: false}}
         />
@@ -102,6 +105,7 @@ function ToDOList() {
         />
       </RootStack.Navigator>
     </NavigationContainer>
+    </Provider>
   );
 }
 export default ToDOList;
